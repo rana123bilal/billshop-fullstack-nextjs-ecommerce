@@ -1,7 +1,8 @@
 'use client'
 import { getRulesForForm } from '@/app/helpers/validations'
-import { Button, Form } from 'antd'
+import { Button, Form, message } from 'antd'
 import FormItem from 'antd/es/form/FormItem'
+import axios from 'axios'
 import Link from 'next/link'
 import React from 'react'
 
@@ -13,10 +14,20 @@ interface RegisterProps {
 }
 
 function Register() {
+    const [loading, setLoading] = React.useState<boolean>(false)
 
-
-    const onRegister = (values: RegisterProps) => {
-        console.log(values)
+    const onRegister = async (values: RegisterProps) => {
+        try {
+            setLoading(true)
+            await axios.post('/api/auth/register', values)
+            message.success('User registered successfully')
+            setLoading(false)
+        } catch (error: any) {
+            message.error(error.response.data.message)
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     return (
@@ -38,7 +49,7 @@ function Register() {
                     <FormItem name='password' label='Password' rules={getRulesForForm('Please input your password!')}>
                         <input type='password' placeholder='Enter Password' />
                     </FormItem>
-                    <Button type='primary' htmlType='submit' block>Register</Button>
+                    <Button type='primary' htmlType='submit' block loading={loading}>Register</Button>
                     <Link href='/auth/login' className='text-primary'>Already have an account? Login</Link>
                 </Form>
             </div>

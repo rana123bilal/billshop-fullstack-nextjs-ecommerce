@@ -1,9 +1,11 @@
 'use client'
 import { getRulesForForm } from '@/app/helpers/validations'
-import { Button, Form } from 'antd'
+import { Button, Form, message } from 'antd'
 import FormItem from 'antd/es/form/FormItem'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React from 'react'
+import axios from 'axios'
 
 
 interface LoginProps {
@@ -12,10 +14,21 @@ interface LoginProps {
 }
 
 function Login() {
+    const router = useRouter();
 
+    const [loading, setLoading] = React.useState<boolean>(false)
 
-    const onLogin = (values: LoginProps) => {
-        console.log(values)
+    const onLogin = async (values: LoginProps) => {
+        try {
+            setLoading(true);
+            await axios.post('/api/auth/login', values);
+            message.success('Logged in successfully');
+            router.push('/');
+        } catch (error: any) {
+            message.error(error.message);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -29,12 +42,12 @@ function Login() {
                     <h1 className='text-2xl font-bold'>Login</h1>
                     <hr />
                     <FormItem name='email' label='Email' rules={getRulesForForm('Please input your email!')} >
-                        <input type='email' placeholder=' Enter Email'/>
+                        <input type='email' placeholder=' Enter Email' />
                     </FormItem>
                     <FormItem name='password' label='Password' rules={getRulesForForm('Please input your password!')} >
                         <input type='password' placeholder='Enter Password' />
                     </FormItem>
-                    <Button type='primary' htmlType='submit' block>Login</Button>
+                    <Button type='primary' htmlType='submit' block loading={loading}>Login</Button>
                     <Link href='/auth/register' className='text-primary'>Dont have account yet? Register</Link>
                 </Form>
             </div>
