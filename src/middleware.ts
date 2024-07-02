@@ -9,7 +9,6 @@ export async function middleware(request: NextRequest) {
     }
 
     const token = request.cookies.get('token')?.value || '';
-    console.log('token', token)
     if (!token && !isPublicRoute) {
         return NextResponse.redirect(new URL('/auth/login', request.url));
     }
