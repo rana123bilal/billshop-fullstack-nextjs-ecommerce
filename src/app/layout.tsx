@@ -4,6 +4,7 @@ import "./globals.css";
 import ThemeProvider from "@/provider/ThemeProvider";
 import { Layout } from "antd";
 import LayoutProvider from "@/provider/LayoutProvider";
+import StoreProvider from "@/provider/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +24,15 @@ export default function RootLayout({
         <link
           href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
           rel="stylesheet"
-        /> 
+        />
       </head>
       <body>
-        <ThemeProvider>
-          <LayoutProvider>{children}</LayoutProvider>
-        </ThemeProvider>
+        <StoreProvider>
+          <ThemeProvider>
+            <LayoutProvider>{children}</LayoutProvider>
+          </ThemeProvider>
+        </StoreProvider>
       </body>
-    </html>
+    </html >
   );
 }
