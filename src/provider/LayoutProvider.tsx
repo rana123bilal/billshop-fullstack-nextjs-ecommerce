@@ -5,11 +5,14 @@ import React, { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Loader from '@/app/components/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import { setCurrentUser } from '@/redux/userSlice'
 
 function LayoutProvider({ children }: { children: React.ReactNode }) {
     const router = useRouter()
-    const [currentUser, setCurrentUser] = React.useState<any>(null)
     const [loading, setLoading] = React.useState(false)
+    const currentUser = useSelector((state: any) => state.user)
+    const dispatch = useDispatch()
 
     const pathname = usePathname()
     const isPrivatePage = pathname !== '/auth/login' && pathname !== '/auth/register'
@@ -19,7 +22,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
             setLoading(true)
             const response = await fetch('/api/auth/currentuser')
             const data = await response.json()
-            setCurrentUser(data.data)
+            dispatch(setCurrentUser(data.data))
         } catch (error) {
             message.error('An error occurred while fetching user data')
         } finally {
@@ -38,7 +41,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
             setLoading(true)
             await axios.get('/api/auth/logout')
             message.success('You have been logged out')
-            setCurrentUser(null)
+            dispatch(setCurrentUser(null))
             router.push('/auth/login')
         }
         catch (error) {
@@ -77,7 +80,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
                             <i className="ri-shopping-cart-line text-white text-2xl"></i>
                             <Popover content={content} trigger="click">
                                 <div className='flex h-6 w-6 bg-white p-2 rounded-full items-center justify-center cursor-pointer'>
-                                    <span>{currentUser?.name[0]}</span>
+                                    <span>{currentUser?.currentUser?.name[0]}</span>
                                 </div>
                             </Popover>
 
