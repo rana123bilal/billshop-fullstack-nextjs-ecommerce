@@ -4,6 +4,26 @@ A full-stack ecommerce App - with techstack of Next-js, Redux toolkit, Mongodb
 =======
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+
+## Technical Stack
+
+BillShop is built on a modern, robust full-stack architecture designed for scalability and efficient data handling. Here’s a breakdown of our technical stack:
+
+
+**Frontend Framework: Next.js -** A React framework that enables functionality such as server-side rendering and generating static websites.
+
+
+**State Management: Redux Toolkit -** Provides a scalable approach to managing state in the application with tools to simplify common Redux patterns.
+
+
+**Backend Database: MongoDB -** A NoSQL database that uses a document-oriented data model and a flexible schema for storing data.
+
+
+**Authentication & Storage: Firebase -** Utilized for secure authentication processes and efficient management of image uploads.
+
+
+****Payment Processing:** Stripe -** Integrated for handling secure, reliable payment transactions including charges and refunds.
+
 ## Getting Started
 
 First, run the development server:
@@ -17,6 +37,28 @@ pnpm dev
 # or
 bun dev
 ```
+
+ ## **User Experience**
+ 
+**Role-Based Access:**
+
+Implements distinct access levels for 'User' and 'Admin', ensuring secure and context-aware interactions across the platform.
+
+
+**Multi-Image Upload:**
+
+Integrate with Firebase for handling multiple image uploads, making product listings both comprehensive and appealing.
+
+
+**Dynamic Filters & Search:**
+
+Utilize Server Components for creating responsive and quick-filtering capabilities, enhancing product discovery.
+
+
+**Inventory Management:**
+
+Robust stock management tools to track and manage product availability effectively.
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
