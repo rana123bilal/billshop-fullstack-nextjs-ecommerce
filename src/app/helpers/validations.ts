@@ -6,3 +6,4 @@ export const getRulesForForm = (message: string) => {
         }
     ]
 }
+
