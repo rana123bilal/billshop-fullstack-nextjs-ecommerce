@@ -31,3 +31,17 @@ button {
   height: 40px !important;
   border: 1px solid #000 !important;
 }
+
+textarea {
+  width: 100% !important;
+  padding: 10px !important;
+  min-height: 100px !important;
+}
+
+table{
+  border: 1px solid #777777 !important;
+}
+
+.btn-small{
+  height: 30px !important;
+}
