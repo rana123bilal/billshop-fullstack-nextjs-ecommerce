@@ -1,23 +1,26 @@
 import mongoose from "mongoose";
 
-export const categoriesSchema = new mongoose.Schema({
+export const categoriesSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true,
-        unique: true
+      type: String,
+      required: true,
+      unique: true,
     },
     description: {
-        type: String,
-        required: false
+      type: String,
+      required: false,
     },
     createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-        required: true
-    }
-},
-    {
-        timestamps: true
-    });
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-export default mongoose.models['categories'] || mongoose.model('categories', categoriesSchema);
+export default mongoose.models["categories"] ||
+  mongoose.model("categories", categoriesSchema);

@@ -72,7 +72,7 @@ function LayoutProvider({ children }: { children: React.ReactNode }) {
             {isPrivatePage && currentUser &&
                 <>
                     <div className='bg-primary py-2 px-5 flex justify-between items-center'>
-                        <div className='flex gap-2'>
+                        <div className='flex gap-2 cursor-pointer' onClick={() => router.push('/')}>
                             <h1 className='text 2xl font-bold text-red-500'>Bills</h1>
                             <h1 className='text 2xl font-bold text-yellow-500'>Shop</h1>
                         </div>

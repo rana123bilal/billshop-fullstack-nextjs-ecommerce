@@ -34,3 +34,21 @@ export async function POST(request: NextRequest) {
       );
     }
   }
+
+  export async function GET(request :NextRequest) {
+    try{
+        await validateJWT(request)
+        const categories  = await Category.find()
+        return NextResponse.json({
+            data: categories
+        })
+    } catch (error: any) {
+        return NextResponse.json(
+            { message: error.message },
+            {
+                status: 500,
+            }
+        );
+    }
+    
+  }
